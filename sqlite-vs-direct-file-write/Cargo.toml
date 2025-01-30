@@ -9,3 +9,12 @@ rusqlite = "0.33.0"
 [[bin]]
 name = "expt1"
 path = "src/expt1.rs"
+
+
+[[bin]]
+name = "expt2"
+path = "src/expt2.rs"
+
+[[bin]]
+name = "expt3"
+path = "src/expt3.rs"

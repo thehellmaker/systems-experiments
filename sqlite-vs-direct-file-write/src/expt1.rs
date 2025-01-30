@@ -46,12 +46,12 @@ fn main() {
         let start = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
         run_write_loop_for_sqlite();
         let end = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
-        println!("Time Taken For SQLite = {}", end.as_millis()-start.as_millis());
+        println!("Time taken for SQLite writes = {}", end.as_millis()-start.as_millis());
     }
     {
         let start = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
         run_write_loop_for_file();
         let end = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
-        println!("Time Taken For direct file writes = {}", end.as_millis()-start.as_millis());
+        println!("Time taken for direct file writes = {}", end.as_millis()-start.as_millis());
     }
 }
