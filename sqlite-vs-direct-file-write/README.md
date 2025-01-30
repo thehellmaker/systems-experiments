@@ -1,64 +1,50 @@
+# Performance Benchmark: SQLite vs. Direct File Writes  
 
-### Experiment 1
-#### Command
-```
+This project benchmarks the performance of writing data **directly to a file** versus inserting data into **SQLite** under different conditions.  The [Blog](https://thehellmaker.vercel.app/blog/are-sqlite-faster-than-direct-file-writes/) explains this code repo in detail.
+
+## 📌 Experiments & Commands  
+
+### **Experiment 1: SQLite vs. Direct File Writes**  
+#### Run:  
+```sh
 mkdir -p bin && cargo run --bin expt1
+```  
+#### Output (Example):  
 ```
+Time Taken For SQLite = 1941 ms  
+Time Taken For Direct File Writes = 6197 ms  
+```  
 
-#### Output
-```
-Time Taken For SQLite = 1941
-Time Taken For direct file writes = 6197
-```
-
-
-### Experiment 2
-#### Command
-```
+### **Experiment 2: Bulk Writes & Sleep Delay Impact**  
+#### Run:  
+```sh
 mkdir -p bin && cargo run --bin expt2
+```  
+#### Output (Example):  
 ```
+100k Write Time Taken = 1466 ms  
+... (Repeats with sleep intervals)  
+100k Write Time Taken = 1593 ms  
+```  
 
-#### Output
-```
-100k Write Time Taken = 1466
-Sleep Start
-Sleep End
-100k Write Time Taken = 1477
-Sleep Start
-Sleep End
-100k Write Time Taken = 1484
-Sleep Start
-Sleep End
-100k Write Time Taken = 1485
-Sleep Start
-Sleep End
-100k Write Time Taken = 1521
-Sleep Start
-Sleep End
-100k Write Time Taken = 1599
-Sleep Start
-Sleep End
-100k Write Time Taken = 1593
-Sleep Start
-Sleep End
-100k Write Time Taken = 1571
-Sleep Start
-Sleep End
-100k Write Time Taken = 1566
-Sleep Start
-Sleep End
-```
-
-
-
-### Experiment 3
-#### Command
-```
+### **Experiment 3: Direct File Write Performance**  
+#### Run:  
+```sh
 mkdir -p bin && cargo run --bin expt3
+```  
+#### Output (Example):  
 ```
+Time Taken For Direct File Writes = 408 ms  
+```  
 
-#### Output
+## 📂 Project Structure  
 ```
-Time taken for direct file writes = 408
-```
+/bin       # Compiled binaries  
+/src/bin/  # Individual Rust experiments  
+README.md  # Documentation  
+Cargo.toml # Rust project configuration  
+```  
 
+## 📌 Notes  
+- Ensure Rust and Cargo are installed before running the experiments.  
+- Results may vary based on hardware and system configurations.  
