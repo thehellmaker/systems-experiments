@@ -1,0 +1,19 @@
+[package]
+name = "rust-perf"
+version = "0.1.0"
+edition = "2021"
+
+[profile.dev]
+opt-level = 3
+
+[profile.release]
+opt-level = 3
+
+[dependencies]
+actix-web = "4.9.0"
+serde_json = "1.0.133"
+serde = { version = "1.0.216", features = ["derive"] }
+tokio = { version = "1.43.0", features = ["full"] }
+uuid = { version = "1.11.0", features = ["v4"] }
+dotenv = "0.15.0"
+reqwest = "0.12.9"
