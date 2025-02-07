@@ -114,6 +114,17 @@ The server was run on a MacBook Pro 2018 on x86 intel processor with 16GB of RAM
 2. **Batching Impact**: AsyncIO with batching (137.78s) shows significant improvement over non-batched AsyncIO (164.81s).
 3. **Least Efficient**: Both multithreading approaches performed significantly slower, taking over 5000 seconds each.
 
+### Understanding the Poor Multithreading Performance
+
+The significantly slower performance of multithreading in Python can be attributed to the Global Interpreter Lock (GIL). The GIL is a mutex that protects access to Python objects, preventing multiple native threads from executing Python bytecodes simultaneously. This means that:
+
+- Even with multiple threads, only one thread can execute Python code at a time
+- The GIL must be acquired and released around I/O operations, adding overhead
+- For I/O-bound tasks like HTTP requests, the thread switching overhead can be substantial
+- The GIL's impact is particularly noticeable in CPU-bound tasks and when using multiple cores
+
+This is why AsyncIO (which is single-threaded but uses cooperative multitasking) and Multiprocessing (which creates separate Python processes, each with its own GIL) perform significantly better for this workload.
+
 This comparison demonstrates the significant performance advantages of using AsyncIO and multiprocessing over traditional multithreading for I/O-bound tasks in Python.
 
 # Python Asyncio URL Fetcher Example
