@@ -2,8 +2,9 @@ from multiprocessing import Pool
 import requests
 import time
 import json
+from config import NUM_URLS, TEST_URL
 
-urls = ["https://jsonplaceholder.typicode.com/todos/1"] * 10000
+urls = [TEST_URL] * NUM_URLS
 
 def fetch(url):
     response = requests.get(url)
