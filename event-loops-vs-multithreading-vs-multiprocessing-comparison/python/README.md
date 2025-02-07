@@ -102,3 +102,81 @@ The server was run on a MacBook Pro 2018 on x86 intel processor with 16GB of RAM
 3. **Least Efficient**: Both multithreading approaches performed significantly slower, taking over 5000 seconds each.
 
 This comparison demonstrates the significant performance advantages of using AsyncIO and multiprocessing over traditional multithreading for I/O-bound tasks in Python.
+
+# Python Asyncio URL Fetcher Example
+
+This example demonstrates how to use Python's asyncio and aiohttp to perform concurrent HTTP requests efficiently using event loops.
+
+## Prerequisites
+
+1. Python 3.7 or higher
+2. Required packages:
+   ```bash
+   pip install aiohttp
+   ```
+
+## Running the Example
+
+1. First, make sure you have a test server running on `http://localhost:8080/ping`. You can use any of these options:
+   - Python's built-in HTTP server
+   - Node.js express server
+   - Any other HTTP server that can handle concurrent requests
+
+2. Run the asyncio test:
+   ```bash
+   python asynciotest.py
+   ```
+
+## How It Works
+
+The code demonstrates several key concepts:
+
+1. **Concurrency Control**: 
+   - Uses `MAX_CONCURRENCY` to limit simultaneous connections
+   - Processes URLs in batches to manage memory usage
+
+2. **Session Management**:
+   - Uses `aiohttp.ClientSession` for efficient connection reuse
+   - Properly manages async resources with context managers
+
+3. **Error Handling**:
+   - Gracefully handles failed requests
+   - Provides progress feedback during execution
+
+## Configuration
+
+You can modify these parameters in the code:
+
+- `MAX_CONCURRENCY`: Maximum number of concurrent connections (default: 1000)
+- `urls`: List of URLs to test (default: 100,000 requests to localhost)
+
+## Performance Notes
+
+- The asyncio implementation is ideal for I/O-bound tasks like HTTP requests
+- It uses a single thread but can handle many concurrent connections
+- Memory usage is controlled through batch processing
+- Performance will vary based on:
+  - Network conditions
+  - Server capacity
+  - System resources
+  - Number of concurrent connections
+
+## Comparison with Other Approaches
+
+This implementation offers several advantages:
+- Lower memory footprint compared to threading
+- Better resource utilization than multiprocessing for I/O-bound tasks
+- Explicit concurrency control
+- Non-blocking I/O operations
+
+## Troubleshooting
+
+1. If you see connection errors:
+   - Verify the test server is running
+   - Check if the port is correct
+   - Reduce `MAX_CONCURRENCY` if server is overwhelmed
+
+2. If you experience memory issues:
+   - Reduce the batch size
+   - Decrease the number of concurrent connections
+   - Monitor system resources during execution
