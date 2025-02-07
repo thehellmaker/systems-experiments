@@ -11,6 +11,7 @@ This document compares different concurrency approaches in Python for processing
 | Multiprocessing + AsyncIO | 11.97 | 83.54 |
 | Multithreading (Pool) | 562.45 | 5410.76 |
 | Multithreading (Basic) | 530.99 | 5280.92 |
+| Serial Implementation | 1106.08 | 11243.92 |
 
 ## Detailed Results
 
@@ -86,6 +87,18 @@ python multithreadingtest.py
 
 ##### 1 million urls
 - Total execution time: 5280.92 seconds
+
+### 5. Serial Implementation
+```bash
+python serial.py
+```
+
+#### Results:
+##### 100000 urls
+- Total execution time: 1106.08 seconds
+
+##### 1 million urls
+- Total execution time: 11243.92 seconds
 
 ## Test Environment
 
