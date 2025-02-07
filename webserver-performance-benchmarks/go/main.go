@@ -31,8 +31,16 @@ func test(c *gin.Context) {
 	})
 }
 
+func ping(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"message": "pong",
+	})
+}
+
 func main() {
 	router := gin.Default()
 	router.POST("/test", test)
+	// Define a GET route
+	router.GET("/ping", ping)
 	router.Run("localhost:8080")
 }
