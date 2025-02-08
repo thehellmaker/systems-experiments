@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+requests
+torch
+torchvision
+transformers
+torchserve
+torch-model-archiver
