@@ -1,6 +1,6 @@
 # Java vs Python Concurrency Performance Comparison
 
-This repository compares different concurrency approaches in Java and Python for processing URLs.
+This repository compares different concurrency approaches in Java and Python for processing URLs. For more details on the context for the code in this repo please refer to the [blog post](https://medium.com/@thehellmaker/event-loops-multi-threading-and-multi-processing-b57e65cf364f).
 
 ## 100K URLs Latency Comparison (seconds)
 
