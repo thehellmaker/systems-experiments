@@ -7,11 +7,11 @@ app = FastAPI()
 class InputData(BaseModel):
     text: str
 
-TORCHSERVE_URL = "http://localhost:8080/predictions/bert_classifier"
+TORCHSERVE_URL = "http://localhost:9080/predictions/bert_classifier"
 
 @app.get("/ping")
 def health_check():
-    response = requests.get("http://localhost:8080/ping")
+    response = requests.get("http://localhost:9080/ping")
     return {"torchserve_status": response.json()}
 
 @app.post("/invocations")

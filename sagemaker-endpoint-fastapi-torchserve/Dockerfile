@@ -1,24 +1,36 @@
-# Use official Python base image
-FROM python:3.9
+# Use official PyTorch base image with CUDA support
+FROM pytorch/pytorch:2.6.0-cuda11.8-cudnn9-devel
 
-# Set working directory
-WORKDIR /app
+# Set working directory for SageMaker
+WORKDIR /opt/ml/code
 
-# Install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    ca-certificates \
+    unzip \
+    openjdk-17-jdk \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install TorchServe
-RUN pip install torchserve torch-model-archiver
+# Install Python dependencies
+COPY requirements.txt /opt/ml/code/
+RUN pip install --no-cache-dir -r /opt/ml/code/requirements.txt
 
-# Copy application code
-COPY app.py .
-COPY entrypoint.sh .
-COPY config.properties .
-COPY model_store/ model_store/
+# Copy application code and required files
+COPY app.py /opt/ml/code/
+COPY serve /opt/ml/code
+COPY config.properties /opt/ml/code
+COPY model_store/ /opt/ml/model
 
-# Expose required ports
-EXPOSE 8000 8080
+# Ensure proper permissions for scripts
+RUN chmod +x /opt/ml/code/serve
 
-# Run entrypoint script
-CMD ["bash", "entrypoint.sh"]
+# Set SageMaker environment variables
+ENV PYTHONUNBUFFERED=TRUE
+ENV PYTHONDONTWRITEBYTECODE=TRUE
+ENV PYTHONPATH /opt/ml/code
+ENV PATH="/opt/ml/code/:${PATH}"
+
+# Expose TorchServe and SageMaker default ports
+EXPOSE 8080
+

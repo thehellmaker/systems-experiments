@@ -6,3 +6,5 @@ torchvision
 transformers
 torchserve
 torch-model-archiver
+transformers
+captum
